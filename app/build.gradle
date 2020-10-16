@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.designedbyz.covidreporter"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            //NOTE: Normally I'd edit these and tune them for the proper rules, but time for this sample app is short
+            //for fun, interview me and ask about the time I decompiled an app to fix a proguard bug that occured when
+            //the android build tools updated proguard as transitive dependency ;)
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroid"
+    implementation "androidx.core:core-ktx:$ktx"
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    implementation "androidx.recyclerview:recyclerview:$recyclerView"
+    implementation "com.squareup.okhttp3:okhttp:$okHttp"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-jackson:$retrofit"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson"
+
+    implementation "com.google.android.gms:play-services-location:$playLocation"
+    implementation "com.squareup.picasso:picasso:$picasso"
+    api "com.google.dagger:dagger:$dagger"
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+
+    testImplementation "junit:junit:$junit"
+    testImplementation "io.mockk:mockk:$mockk"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}
